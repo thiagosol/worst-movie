@@ -1,0 +1,23 @@
+goldenraspberryawards:
+  worstmovie:
+    loadmoviesfromfile:
+      csv:
+        delimiter: ;
+        first-column-name: year
+        path: resource:movielist.csv
+
+spring:
+  datasource:
+    driverClassName: org.h2.Driver
+    password: ''
+    url: jdbc:h2:mem:testdb
+    username: sa
+  h2:
+    console:
+      enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
