@@ -22,7 +22,7 @@ The API swagger and documentation can be found at URL:
 Through a terminal window, access the project directory, and execute the following command:
 
 ```bash
-mvn test
+mvnw test
 ```
 
 ## Import Custom Movie File
