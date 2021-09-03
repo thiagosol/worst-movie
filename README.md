@@ -1,3 +1,8 @@
+
+[![Build Status](https://travis-ci.com/thiagosol/worst-movie.svg?token=WhU4GBdWs3ypznDb6vBE&branch=main)](https://app.travis-ci.com/github/thiagosol/worst-movie)
+[![codecov](https://codecov.io/gh/thiagosol/worst-movie/branch/main/graph/badge.svg?token=QTI83C1F52)](https://codecov.io/gh/thiagosol/worst-movie)
+
+
 # Worst Movie
 
 Worst Movie is an API that handles the latest movies chosen by the Golden Raspberry Awards.
