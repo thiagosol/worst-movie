@@ -17,21 +17,21 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @NamedNativeQuery(name = "Producer.findProducersAwardsRange",
-        query = "SELECT MP.PRODUCER_ID \"producer\",\n" +
-                "(M_NEXT.YEAR - M.YEAR) \"interval\", \n" +
-                "M.YEAR \"previous\", \n" +
-                "M_NEXT.YEAR \"following\"\n" +
-                "FROM MOVIE M\n" +
-                "INNER JOIN MOVIE_PRODUCER MP ON MP.MOVIE_ID = M.ID\n" +
-                "INNER JOIN MOVIE_PRODUCER MP_NEXT ON MP_NEXT.PRODUCER_ID = MP.PRODUCER_ID \n" +
-                "INNER JOIN MOVIE M_NEXT ON M_NEXT.WINNER = 'TRUE' AND MP_NEXT.MOVIE_ID = M_NEXT.ID\n" +
-                "WHERE M.WINNER = 'TRUE'  \n" +
-                "   AND M_NEXT.YEAR = (SELECT MIN(M_MAX.YEAR) \n" +
-                "           FROM MOVIE_PRODUCER MP_MAX\n" +
-                "           INNER JOIN MOVIE M_MAX ON MP_MAX.MOVIE_ID =  M_MAX.ID \n" +
-                "           WHERE MP_MAX.MOVIE_ID = MP_NEXT.MOVIE_ID \n" +
-                "               AND M_MAX.ID = M_NEXT.ID \n" +
-                "               AND M_MAX.YEAR > M.YEAR)",
+        query = "SELECT MP.PRODUCER_ID \"producer\", \n" +
+                "        (M_NEXT.YEAR - M.YEAR) \"interval\", \n" +
+                "        M.YEAR \"previous\", \n" +
+                "        M_NEXT.YEAR \"following\" \n" +
+                "        FROM MOVIE M \n" +
+                "        INNER JOIN MOVIE_PRODUCER MP ON MP.MOVIE_ID = M.ID \n" +
+                "        INNER JOIN MOVIE_PRODUCER MP_NEXT ON MP_NEXT.PRODUCER_ID = MP.PRODUCER_ID \n" +
+                "        INNER JOIN MOVIE M_NEXT ON M_NEXT.WINNER = 'TRUE' AND MP_NEXT.MOVIE_ID = M_NEXT.ID \n" +
+                "        WHERE M.WINNER = 'TRUE' \n" +
+                "        AND M_NEXT.YEAR = (SELECT MIN(M_MIN.YEAR) \n" +
+                "                           FROM  MOVIE M_MIN \n" +
+                "                           INNER JOIN MOVIE_PRODUCER MP_MIN ON MP_MIN.PRODUCER_ID = MP_NEXT.PRODUCER_ID \n" +
+                "                                                             AND MP_MIN.MOVIE_ID = M_MIN.ID \n" +
+                "                           WHERE M_MIN.WINNER = 'TRUE' \n" +
+                "                             AND M_MIN.YEAR > M.YEAR)",
         resultSetMapping = "Mapping.ProducersAwardsRangeDTO")
 @SqlResultSetMapping(name = "Mapping.ProducersAwardsRangeDTO",
         classes = @ConstructorResult(targetClass = ProducerAwardRangeDTO.class,
